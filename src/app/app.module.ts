@@ -3,10 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { TaglineReportComponent } from './Feature/tagline-report/tagline-report.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TaglineReportComponent
   ],
   imports: [
     BrowserModule,
