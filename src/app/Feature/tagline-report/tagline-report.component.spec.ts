@@ -8,9 +8,9 @@ describe('TaglineReportComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TaglineReportComponent ]
+      declarations: [TaglineReportComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(TaglineReportComponent);
     component = fixture.componentInstance;

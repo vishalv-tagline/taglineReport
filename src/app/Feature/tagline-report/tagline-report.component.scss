@@ -1,0 +1,65 @@
+body{
+    font-family: 'Montserrat',sans-serif;
+}
+
+.header{
+    width: 100%;
+    padding: 25px 25px;
+    background: #fff7f3;
+    border-bottom: 2px solid #DA6427;
+    text-align: center;
+}
+
+.header img{
+    width: 100%;
+    max-width: 250px;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.container h1::after{
+    position: absolute;
+    content: " ";
+    bottom: -15px;
+    left: 0;
+    width: 43%;
+    margin-left: 365px;
+    height: 3px;
+    background: #DA6427;
+}
+
+.textChange{
+    color: #DA6122;
+    font-weight: 800;
+    font-size: 16px;
+    margin-top: 8px;
+    padding: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.back{
+    width: 50%;
+}
+
+.back2{
+    width: 50%;
+    background-color: #fff7f3;
+}
+
+.btnColor{
+    background-color: #DA6427;
+    color: #fff;
+}
+
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched{
+    border: 1px solid #DA6427;
+    box-shadow: 0 0 2px inset red;
+}
+
+.firstDiv{
+    border-right: 1px solid #e5e5e5;
+}
+
