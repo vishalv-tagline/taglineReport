@@ -2,21 +2,21 @@ body{
     font-family: 'Montserrat',sans-serif;
 }
 
-.header{
-    width: 100%;
-    padding: 25px 25px;
-    background: #fff7f3;
-    border-bottom: 2px solid #DA6427;
-    text-align: center;
-}
+// .header{
+//     width: 100%;
+//     padding: 25px 25px;
+//     background: #fff7f3;
+//     border-bottom: 2px solid #DA6427;
+//     text-align: center;
+// }
 
-.header img{
-    width: 100%;
-    max-width: 250px;
-    display: block;
-    margin: 0 auto;
-    text-align: center;
-}
+// .header img{
+//     width: 100%;
+//     max-width: 250px;
+//     display: block;
+//     margin: 0 auto;
+//     text-align: center;
+// }
 
 .container h1::after{
     position: absolute;
@@ -29,24 +29,24 @@ body{
     background: #DA6427;
 }
 
-.textChange{
-    color: #DA6122;
-    font-weight: 800;
-    font-size: 16px;
-    margin-top: 8px;
-    padding: 5px;
-    cursor: pointer;
-    text-align: center;
-}
+// .textChange{
+//     color: #DA6122;
+//     font-weight: 800;
+//     font-size: 16px;
+//     margin-top: 8px;
+//     padding: 5px;
+//     cursor: pointer;
+//     text-align: center;
+// }
 
-.back{
-    width: 50%;
-}
+// .back{
+//     width: 50%;
+// }
 
-.back2{
-    width: 50%;
-    background-color: #fff7f3;
-}
+// .back2{
+//     width: 50%;
+//     background-color: #fff7f3;
+// }
 
 .btnColor{
     background-color: #DA6427;

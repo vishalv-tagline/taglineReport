@@ -1,0 +1,78 @@
+<div class="container-fluid mt-5">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="p-3 border rounded">
+                <h1 class="text-danger text-center mt-4">Add User</h1>
+                <form class="row g-2" [formGroup]="addUserForm" action="">
+                    <div class="col-lg-12">
+                        <label for="" class="form-label">UserId</label>
+                        <input class="form-control form-control-lg" type="text" formControlName="userId"
+                            placeholder="Enter UserID">
+                    </div>
+                    <div class="col-lg-12">
+                        <label for="" class="form-label">Id</label>
+                        <input class="form-control form-control-lg" type="text" formControlName="id"
+                            placeholder="Enter ID">
+                    </div>
+                    <div class="col-lg-12">
+                        <label for="" class="form-label">Title</label>
+                        <input class="form-control form-control-lg" type="text" formControlName="title"
+                            placeholder="Enter Title">
+                    </div>
+                    <div class="col-lg-12">
+                        <label for="" class="form-label">Body</label>
+                        <input class="form-control form-control-lg" type="text" formControlName="body"
+                            placeholder="Enter Body">
+                    </div>
+                    <div class="col-lg-12 mt-4">
+                        <button type="button" class="btn btn-lg btn-primary w-100"
+                            (click)="saveUser($event)">{{btnName}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <h1 class="text-danger text-center">Users Details</h1>
+            <table class="table table-responsive table-striped table-hover scrolly">
+                <thead class="table table-dark">
+                    <tr>
+                        <th>UserId</th>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Body</th>
+                        <th>Operation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of userData;let i=index">
+                        <td>{{item.userId}}</td>
+                        <td>{{item.id}}</td>
+                        <td class="fieldTitle">{{item.title }}</td>
+                        <td class="fieldBody">{{item.body}}</td>
+                        <td>
+                            <button type="button" (click)="viewuser(i)" class="btn btn-sm btn-success">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-primary mx-1" (click)="updateUser(i)">
+                                <i class="fa-solid fa-pen"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-danger " (click)="deleteUser(i)">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr *ngIf="userData.length  === 0">
+                        <td class="text-center text-danger fw-bold" colspan="5">No recored found</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- <div class="mt-2">
+    <div class="d-flex flex-wrap flex-row justify-content-center">
+        <div class="m-1" *ngFor="let ph of photos">
+            <img [src]="ph.thumbnailUrl" alt="" style="height: 100px; width: 100px;">
+        </div>
+    </div>
+</div> -->

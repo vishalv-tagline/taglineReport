@@ -1,0 +1,48 @@
+// .isActive{
+//     color: red;
+//     background-color: black;
+// }
+
+.header{
+    width: 100%;
+    padding: 25px 25px;
+    background: #fff7f3;
+    border-bottom: 2px solid #DA6427;
+    text-align: center;
+}
+
+.header img{
+    width: 100%;
+    max-width: 250px;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.textChange {
+    font-weight: 800;
+    font-size: 16px;
+    margin-top: 8px;
+    padding: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+a{
+    color: #DA6122;
+    text-decoration: none;
+}
+
+.back{
+    width: 50%;
+}
+
+.back2{
+    width: 50%;
+    background-color: #fff7f3;
+}
+
+.btnColor{
+    background-color: #DA6427;
+    color: #fff;
+}
