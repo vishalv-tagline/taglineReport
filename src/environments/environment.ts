@@ -4,7 +4,10 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://jsonplaceholder.typicode.com/'
+  apiUrl: 'https://jsonplaceholder.typicode.com/',
+  ownapiurl: '../assets/data.json',
+  newUsersApi: 'https://reqres.in/api/',
+  ecomApi: 'https://fakestoreapi.com/'
 };
 
 /*

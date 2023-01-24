@@ -16,7 +16,18 @@ export class TaglineLeavereportComponent implements OnInit {
   public currentEditId: any;
   public userData: Users[] = [];
   public addUserForm!: FormGroup;
+  public allUserList: number = 0;
+  public pagination: number = 1;
+
   public photos: any = []
+  public ownData: any = []
+
+  public searchText: any;
+  public fillterData: Users[] = [];
+
+  public newUsers: any = []
+
+  public productList: any = []
 
 
   constructor(private commonService: CommonService) {
@@ -29,18 +40,54 @@ export class TaglineLeavereportComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.commonService.getUser().subscribe((data: any) => {
-      this.userData = data
-      // console.log('data :>> ', data);
-    })
+    this.fetchUserData();
+    this.fetchProduct();
 
     // this.commonService.getPhotos().subscribe((d) => {
     //   this.photos = d
     //   console.log('d :>> ', d);
     // })
+
+    this.commonService.getOwnapi().subscribe((data) => {
+      console.log('data :>> ', data);
+      this.ownData = data
+    })
+
+    this.commonService.newgetUsers().subscribe((response) => {
+      // console.log('response :>> ', response);
+      this.newUsers = response
+      console.log('this.newUsers.data :>> ', this.newUsers.data);
+    })
+
+    // console.log('this.searchText :>> ', this.searchText);
+  }
+
+  fetchUserData() {
+    this.commonService.getUser(this.pagination).subscribe((response: any) => {
+      this.userData = response
+      // this.allUserList = response.total
+      // console.log('response.total :>> ', response.total);
+      // console.log('data :>> ', data);
+    })
+  }
+
+  renderPageUsers(event: number) {
+    this.pagination = event;
+    this.fetchUserData();
+  }
+
+  ownDataDelete(data: any) {
+    this.commonService.deleteOwnDataDelete(data).subscribe((d) => {
+      let ind = this.ownData.indexOf(data);
+      this.ownData.splice(ind, 1)
+      console.log('Delete recored');
+    })
   }
 
   saveUser(data: any) {
+    if (this.addUserForm.invalid) {
+      return
+    }
     if (this.btnName === "Submit") {
       this.commonService.postUser(this.addUserForm.value).subscribe((data: any) => {
         this.userData.push({
@@ -67,10 +114,14 @@ export class TaglineLeavereportComponent implements OnInit {
   }
 
   updateUser(i: number) {
-    console.log('i :>> ', i);
     this.currentEditId = i;
+    const currentValue = this.userData.find((user: any) => {
+      if (user.id === i) {
+        return user;
+      }
+    })
     this.addUserForm.patchValue({
-      ...this.userData[i]
+      ...currentValue
     })
     this.btnName = "Update"
     console.log('index of recored :>> ', i);
@@ -100,4 +151,38 @@ export class TaglineLeavereportComponent implements OnInit {
   //   this.userData.splice(i, 1)
   // }
 
+  // updateResults() {
+  //   this.fillterData = (this.searchByValue(this.userData));
+  // }
+
+  // searchByValue(userData: any) {
+  //   return userData.filter((user: any) => {
+  //     if (this.searchText.trim() === '') {
+  //       return true;
+  //     } else {
+  //       return user.userId.toLowerCase().includes(this.searchText.trim().toLocaleLowerCase()) || user.body.toLowerCase().includes(this.searchText.trim().toLocaleLowerCase());
+  //     }
+  //   })
+  // }
+
+  deleteNewUser(i: number) {
+    this.commonService.newUserDelete(i).subscribe((data) => {
+      let deleteId = this.newUsers.indexOf(i);
+      this.newUsers.splice(this.newUsers.data.id, 1)
+    })
+  }
+
+  fetchProduct() {
+    this.commonService.getProduct().subscribe((response) => {
+      console.log('response :>> ', response);
+      this.productList = response
+    })
+  }
+
+  onedeleteProduct(i: number) {
+    this.commonService.deleteProduct(i).subscribe((data) => {
+      let checkId = this.productList.indexOf(i);
+      this.productList.splice(checkId, 1)
+    })
+  }
 }

@@ -15,8 +15,8 @@ export class CommonService {
     // });
   }
 
-  getUser() {
-    return this.http.get(environment.apiUrl + `posts`)
+  getUser(page: number) {
+    return this.http.get(environment.apiUrl + `posts` + '?page=' + page)
   }
 
   postUser(user: Users) {
@@ -35,8 +35,35 @@ export class CommonService {
     return this.http.delete(environment.apiUrl + `posts/` + id)
   }
 
+  getOwnapi() {
+    return this.http.get(environment.ownapiurl)
+  }
+
+  deleteOwnDataDelete(rno: number) {
+    return this.http.delete(environment.ownapiurl + "/" + rno)
+  }
 
   // getPhotos() {
   //   return this.http.get(environment.apiUrl + `photos`)
   // }
+
+  newgetUsers() {
+    return this.http.get(environment.newUsersApi + `users`)
+  }
+
+  newUserDelete(id: any) {
+    return this.http.delete(environment.newUsersApi + `users/` + id)
+  }
+
+  getProduct() {
+    return this.http.get(environment.ecomApi + `products`)
+  }
+
+  deleteProduct(id: number) {
+    return this.http.delete(environment.ecomApi + `products/` + id)
+  }
+
+  prosuctPatch() {
+    return this.http.delete(environment.ecomApi)
+  }
 }

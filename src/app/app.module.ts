@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { TaglineReportComponent } from './feature/tagline-report/tagline-report.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { TaglineLeavereportComponent } from './feature/tagline-leavereport/tagline-leavereport.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -21,7 +22,9 @@ import { TaglineLeavereportComponent } from './feature/tagline-leavereport/tagli
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,27 @@
+[
+    {
+        "rno":101,
+        "name":"Vishal",
+        "course":"BCA"
+    },
+    {
+        "rno":102,
+        "name":"Parag",
+        "course":"BCOM"
+    },
+    {
+        "rno":103,
+        "name":"Panti",
+        "course":"BBA"
+    },
+    {
+        "rno":104,
+        "name":"Rohit",
+        "course":"BCA"
+    },
+    {
+        "rno":105,
+        "name":"Virat",
+        "course":"BA"
+    }
+]
