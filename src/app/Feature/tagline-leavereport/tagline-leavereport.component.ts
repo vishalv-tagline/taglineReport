@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Users } from 'src/app/common';
 import { CommonService } from 'src/app/services/common.service';
 // import Swal from 'sweetalert2';
-
+import { ToastrService } from 'ngx-toastr';
+// import { Observable } from 'rxjs';
+// import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-tagline-leavereport',
@@ -29,15 +31,22 @@ export class TaglineLeavereportComponent implements OnInit {
 
   public productList: any = []
 
+  submitted: boolean = false;
 
-  constructor(private commonService: CommonService) {
-    this.addUserForm = new FormGroup({
-      userId: new FormControl('', [Validators.required]),
-      id: new FormControl('', [Validators.required]),
-      title: new FormControl('', Validators.required),
-      body: new FormControl('', Validators.required)
-    });
+
+  constructor(private commonService: CommonService, private fb: FormBuilder, private toastrService: ToastrService) {
+
+    this.addUserForm = this.fb.group({
+      userId: ["", [Validators.required]],
+      title: ["", [Validators.required]],
+      body: ["", [Validators.required]]
+    })
   }
+
+  get frmControl() {
+    return this.addUserForm.controls;
+  }
+
 
   ngOnInit(): void {
     this.fetchUserData();
@@ -58,8 +67,6 @@ export class TaglineLeavereportComponent implements OnInit {
       this.newUsers = response
       console.log('this.newUsers.data :>> ', this.newUsers.data);
     })
-
-    // console.log('this.searchText :>> ', this.searchText);
   }
 
   fetchUserData() {
@@ -86,9 +93,11 @@ export class TaglineLeavereportComponent implements OnInit {
 
   saveUser(data: any) {
     if (this.addUserForm.invalid) {
+      this.toastrService.error('Please fill all details', 'Error', { closeButton: true, progressBar: true, progressAnimation: 'decreasing' });
       return
     }
     if (this.btnName === "Submit") {
+      // delete this.addUserForm.value.id
       this.commonService.postUser(this.addUserForm.value).subscribe((data: any) => {
         this.userData.push({
           userId: data.userId,
@@ -98,6 +107,7 @@ export class TaglineLeavereportComponent implements OnInit {
         });
       })
       this.addUserForm.reset();
+      this.toastrService.success('Recored insert successfully', 'Success', { closeButton: true, progressBar: true, progressAnimation: 'decreasing' });
       console.log('Recored inserted');
     }
     else if (this.currentEditId > -1) {
@@ -110,6 +120,7 @@ export class TaglineLeavereportComponent implements OnInit {
       });
       this.addUserForm.reset();
       this.btnName = "Submit";
+      this.toastrService.success('Recored update successfully', 'Update', { closeButton: true, progressBar: true, progressAnimation: 'decreasing' });
     }
   }
 
@@ -132,6 +143,7 @@ export class TaglineLeavereportComponent implements OnInit {
     this.commonService.deleteUser(data).subscribe((d) => {
       let ind = this.userData.indexOf(data);
       this.userData.splice(ind, 1)
+      this.toastrService.error('Recored delete successfully', 'Deleted', { closeButton: true, progressBar: true, progressAnimation: 'decreasing' });
       console.log('Delete recored');
     })
   }
@@ -185,4 +197,10 @@ export class TaglineLeavereportComponent implements OnInit {
       this.productList.splice(checkId, 1)
     })
   }
+
+  openModal() {
+    console.log('Deleted');
+  }
+
+
 }

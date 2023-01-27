@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Users } from '../common';
-
+// import { Observable } from 'rxjs/Observable';
 
 @Injectable({
   providedIn: 'root'
@@ -66,4 +66,13 @@ export class CommonService {
   prosuctPatch() {
     return this.http.delete(environment.ecomApi)
   }
+
+  // showTime(): Observable<Date> {
+  //   return new Observable(
+  //     observer => {
+  //       setInterval(() =>
+  //         observer.next(new Date()), 1000);
+  //     }
+  //   );
+  // }
 }
