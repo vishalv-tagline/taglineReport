@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Users } from 'src/app/common';
 import { CommonService } from 'src/app/services/common.service';
-// import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
-// import { Observable } from 'rxjs';
-// import 'rxjs/add/operator/map';
+
+
 
 @Component({
   selector: 'app-tagline-leavereport',
@@ -32,6 +31,7 @@ export class TaglineLeavereportComponent implements OnInit {
   public productList: any = []
 
   submitted: boolean = false;
+  public deleteUserId!: number;
 
 
   constructor(private commonService: CommonService, private fb: FormBuilder, private toastrService: ToastrService) {
@@ -41,6 +41,8 @@ export class TaglineLeavereportComponent implements OnInit {
       title: ["", [Validators.required]],
       body: ["", [Validators.required]]
     })
+
+
   }
 
   get frmControl() {
@@ -50,12 +52,8 @@ export class TaglineLeavereportComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchUserData();
-    this.fetchProduct();
+    // this.fetchProduct();
 
-    // this.commonService.getPhotos().subscribe((d) => {
-    //   this.photos = d
-    //   console.log('d :>> ', d);
-    // })
 
     this.commonService.getOwnapi().subscribe((data) => {
       console.log('data :>> ', data);
@@ -70,7 +68,7 @@ export class TaglineLeavereportComponent implements OnInit {
   }
 
   fetchUserData() {
-    this.commonService.getUser(this.pagination).subscribe((response: any) => {
+    this.commonService.getUser().subscribe((response: any) => {
       this.userData = response
       // this.allUserList = response.total
       // console.log('response.total :>> ', response.total);
@@ -139,11 +137,21 @@ export class TaglineLeavereportComponent implements OnInit {
     console.log('this.userData[i] :>> ', this.userData[i]);
   }
 
-  deleteUser(data: any) {
-    this.commonService.deleteUser(data).subscribe((d) => {
-      let ind = this.userData.indexOf(data);
-      this.userData.splice(ind, 1)
-      this.toastrService.error('Recored delete successfully', 'Deleted', { closeButton: true, progressBar: true, progressAnimation: 'decreasing' });
+  findId(id: number) {
+    this.deleteUserId = id
+    console.log('id :>> ', id);
+    return id;
+  }
+
+  deleteUser() {
+    console.log('this.deleteUserId :>> ', this.deleteUserId);
+    this.commonService.deleteUser(this.deleteUserId).subscribe((d) => {
+      const deleteId = this.userData.filter((data) => {
+        return data.id !== this.deleteUserId;
+      })
+      console.log('deleteId :>> ', deleteId);
+      this.userData = deleteId;
+      this.toastrService.success('Recored delete successfully', 'Deleted', { closeButton: true, progressBar: true, progressAnimation: 'decreasing' });
       console.log('Delete recored');
     })
   }
@@ -157,50 +165,4 @@ export class TaglineLeavereportComponent implements OnInit {
     })
     console.log("View Profile")
   }
-
-  // deleteUser(i: number) {
-  //   console.log('User deleted');
-  //   this.userData.splice(i, 1)
-  // }
-
-  // updateResults() {
-  //   this.fillterData = (this.searchByValue(this.userData));
-  // }
-
-  // searchByValue(userData: any) {
-  //   return userData.filter((user: any) => {
-  //     if (this.searchText.trim() === '') {
-  //       return true;
-  //     } else {
-  //       return user.userId.toLowerCase().includes(this.searchText.trim().toLocaleLowerCase()) || user.body.toLowerCase().includes(this.searchText.trim().toLocaleLowerCase());
-  //     }
-  //   })
-  // }
-
-  deleteNewUser(i: number) {
-    this.commonService.newUserDelete(i).subscribe((data) => {
-      let deleteId = this.newUsers.indexOf(i);
-      this.newUsers.splice(this.newUsers.data.id, 1)
-    })
-  }
-
-  fetchProduct() {
-    this.commonService.getProduct().subscribe((response) => {
-      console.log('response :>> ', response);
-      this.productList = response
-    })
-  }
-
-  onedeleteProduct(i: number) {
-    this.commonService.deleteProduct(i).subscribe((data) => {
-      let checkId = this.productList.indexOf(i);
-      this.productList.splice(checkId, 1)
-    })
-  }
-
-  openModal() {
-    console.log('Deleted');
-  }
-
-
 }

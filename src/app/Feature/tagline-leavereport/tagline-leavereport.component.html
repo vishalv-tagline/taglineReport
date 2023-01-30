@@ -65,114 +65,40 @@
                                 <i class="fa-solid fa-pen"></i>
                             </button>
                             <button type="button" class="btn btn-sm btn-danger " data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
+                                data-bs-target="#exampleModal" (click)="findId(item.id)">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
-                            <div class="modal" id="exampleModal" tabindex="-1">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title text-danger"><i
-                                                    class="fa-solid fa-triangle-exclamation"></i>
-                                                Warning</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p class="text-danger fw-bold">Are you sure delete this?</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">No</button>
-                                            <button type="button" class="btn btn-danger" (click)="deleteUser(i)"
-                                                data-bs-dismiss="modal">Yes</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <!-- <button type="button" class="btn btn-danger" (click)="deleteUser(item.id)"
+                                data-bs-dismiss="modal">Yes</button> -->
                         </td>
                     </tr>
-                    <tr *ngIf="userData.length  === 0">
+                    <tr *ngIf="!userData.length">
                         <td class="text-center text-danger fw-bold" colspan="5">No recored found</td>
                     </tr>
                 </tbody>
             </table>
+            <div class="modal" id="exampleModal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-danger"><i class="fa-solid fa-triangle-exclamation"></i>
+                                Warning</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p class="text-danger fw-bold">Are you sure delete this?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                                (click)="deleteUser()">Yes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!-- <div class="d-flex justify-content-center">
                 <pagination-controls (pageChange)="renderPageUsers($event)"></pagination-controls>
             </div> -->
         </div>
     </div>
 </div>
-<!-- <hr> -->
-<!-- <div class="mt-2">
-    <div class="d-flex flex-wrap flex-row justify-content-center">
-        <div class="m-1" *ngFor="let ph of photos">
-            <img [src]="ph.thumbnailUrl" alt="" style="height: 100px; width: 100px;">
-        </div>
-    </div>
-</div> -->
-<!-- <div class="container-fluid p-3 ">
-    <h1 class="h1 text-center text-danger">Other Api Calling</h1>
-    <div class="d-flex flex-wrap flex-row">
-        <div class="p-2 mx-1" *ngFor="let user of newUsers.data;let i=index;">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" [src]="user.avatar" alt="Card image cap">
-                <div class="card-body">
-                    <h4 class="h4 extra">0{{user.id}}</h4>
-                    <h5 class="card-title">{{user.first_name}} {{user.last_name}}</h5>
-                    <p class="card-text">{{user.email}}</p>
-                    <button type="button" class="btn btn-sm btn-primary mx-1">
-                        <i class="fa-solid fa-pen"></i>
-                    </button>
-                    <button type="button" class="btn btn-sm btn-danger" (click)="deleteNewUser(i)">
-                        <i class="fa-solid fa-trash"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <hr>
-    <div class="mt-4">
-        <h1 class="h1 text-center text-danger">Product Details</h1>
-        <table class=" table table-responsive table-striped ">
-            <thead class=" table table-dark ">
-                <tr>
-                    <th>Id</th>
-                    <th>Title</th>
-                    <th>Category</th>
-                    <th>Description</th>
-                    <th>Prtice</th>
-                    <th>Rate</th>
-                    <th>Count</th>
-                    <th>Image</th>
-                    <th>Operation</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor=" let product of productList;let i=index">
-                    <td>{{product.id}}</td>
-                    <td>{{product.title}}</td>
-                    <td>{{product.category}}</td>
-                    <td>{{product.description}}</td>
-                    <td class=" text-danger">&#8377;{{product.price}}</td>
-                    <td class="text-success">{{product.rating.rate}}&#37;</td>
-                    <td class="text-primary">{{product.rating.count}}</td>
-                    <td>
-                        <img [src]="product.image" alt="img" height="100px" width="100px">
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-sm btn-primary mx-1">
-                            <i class="fa-solid fa-pen"></i>
-                        </button>
-                        <button type="button" class="btn btn-sm btn-danger" (click)="onedeleteProduct(i)">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr *ngIf="productList.length  === 0">
-                    <td class="text-center text-danger fw-bold" colspan="9">No recored found</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div> -->

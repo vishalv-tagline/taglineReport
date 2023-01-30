@@ -38,3 +38,130 @@
                     </div>
                 </div>
             </div>
+
+- - - - - - - - - - Implementing other api - - - - - - - - - 
+<!-- <hr> -->
+<!-- <div class="mt-2">
+    <div class="d-flex flex-wrap flex-row justify-content-center">
+        <div class="m-1" *ngFor="let ph of photos">
+            <img [src]="ph.thumbnailUrl" alt="" style="height: 100px; width: 100px;">
+        </div>
+    </div>
+</div> -->
+<!-- <div class="container-fluid p-3 ">
+    <h1 class="h1 text-center text-danger">Other Api Calling</h1>
+    <div class="d-flex flex-wrap flex-row">
+        <div class="p-2 mx-1" *ngFor="let user of newUsers.data;let i=index;">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" [src]="user.avatar" alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="h4 extra">0{{user.id}}</h4>
+                    <h5 class="card-title">{{user.first_name}} {{user.last_name}}</h5>
+                    <p class="card-text">{{user.email}}</p>
+                    <button type="button" class="btn btn-sm btn-primary mx-1">
+                        <i class="fa-solid fa-pen"></i>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-danger" (click)="deleteNewUser(i)">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="mt-4">
+        <h1 class="h1 text-center text-danger">Product Details</h1>
+        <table class=" table table-responsive table-striped ">
+            <thead class=" table table-dark ">
+                <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Prtice</th>
+                    <th>Rate</th>
+                    <th>Count</th>
+                    <th>Image</th>
+                    <th>Operation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor=" let product of productList;let i=index">
+                    <td>{{product.id}}</td>
+                    <td>{{product.title}}</td>
+                    <td>{{product.category}}</td>
+                    <td>{{product.description}}</td>
+                    <td class=" text-danger">&#8377;{{product.price}}</td>
+                    <td class="text-success">{{product.rating.rate}}&#37;</td>
+                    <td class="text-primary">{{product.rating.count}}</td>
+                    <td>
+                        <img [src]="product.image" alt="img" height="100px" width="100px">
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-sm btn-primary mx-1">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-danger" (click)="onedeleteProduct(i)">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr *ngIf="productList.length  === 0">
+                    <td class="text-center text-danger fw-bold" colspan="9">No recored found</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div> -->
+
+----------------
+this.commonService.getPhotos().subscribe((d) => {
+      this.photos = d
+      console.log('d :>> ', d);
+})
+
+= = = = = ------------
+
+deleteUser(i: number) {
+    console.log('User deleted');
+    this.userData.splice(i, 1)
+  }
+
+  updateResults() {
+    this.fillterData = (this.searchByValue(this.userData));
+  }
+
+  searchByValue(userData: any) {
+    return userData.filter((user: any) => {
+      if (this.searchText.trim() === '') {
+        return true;
+      } else {
+        return user.userId.toLowerCase().includes(this.searchText.trim().toLocaleLowerCase()) || user.body.toLowerCase().includes(this.searchText.trim().toLocaleLowerCase());
+      }
+    })
+  }
+
+  deleteNewUser(i: number) {
+    this.commonService.newUserDelete(i).subscribe((data) => {
+      let deleteId = this.newUsers.indexOf(i);
+      this.newUsers.splice(this.newUsers.data.id, 1)
+    })
+  }
+
+  fetchProduct() {
+    this.commonService.getProduct().subscribe((response) => {
+      console.log('response :>> ', response);
+      this.productList = response
+    })
+  }
+
+  onedeleteProduct(i: number) {
+    this.commonService.deleteProduct(i).subscribe((data) => {
+      let checkId = this.productList.indexOf(i);
+      this.productList.splice(checkId, 1)
+    })
+  }
+
+  openModal() {
+    console.log('Deleted');
+  }

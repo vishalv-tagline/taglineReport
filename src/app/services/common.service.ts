@@ -15,8 +15,8 @@ export class CommonService {
     // });
   }
 
-  getUser(page: number) {
-    return this.http.get(environment.apiUrl + `posts` + '?page=' + page)
+  getUser() {
+    return this.http.get(environment.apiUrl + `posts`)
   }
 
   postUser(user: Users) {
