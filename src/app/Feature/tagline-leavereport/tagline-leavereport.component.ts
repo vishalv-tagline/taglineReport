@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Users } from 'src/app/common';
 import { CommonService } from 'src/app/services/common.service';
 import { ToastrService } from 'ngx-toastr';
+import { Observable, Observer } from 'rxjs';
 
 
 
@@ -60,11 +61,23 @@ export class TaglineLeavereportComponent implements OnInit {
       this.ownData = data
     })
 
-    this.commonService.newgetUsers().subscribe((response) => {
+    this.commonService.newgetUsers().subscribe((response: any) => {
       // console.log('response :>> ', response);
       this.newUsers = response
       console.log('this.newUsers.data :>> ', this.newUsers.data);
     })
+
+    // var observable = Observable.create((observer: any) => {
+    //   observer.next('A')
+    //   observer.next('B')
+    //   observer.error('Error occured.')
+    //   observer.next('C')
+    //   observer.complete('Data stream is over.')
+
+    // })
+    // observable.subscribe(function showMessage(msg: any) {
+    //   console.log(msg)
+    // })
   }
 
   fetchUserData() {
@@ -73,6 +86,15 @@ export class TaglineLeavereportComponent implements OnInit {
       // this.allUserList = response.total
       // console.log('response.total :>> ', response.total);
       // console.log('data :>> ', data);
+      let fetchData = Observable.create((observer: Observer<Users[]>) => {
+        observer.next(this.userData);
+        observer.complete();
+      })
+      console.log('fetchData :>> ', fetchData);
+    })
+    this.commonService.getUser().subscribe((res: Users[]) => {
+      this.userData = res
+      console.log('this.userData :>> ', this.userData);
     })
   }
 
@@ -81,15 +103,8 @@ export class TaglineLeavereportComponent implements OnInit {
     this.fetchUserData();
   }
 
-  ownDataDelete(data: any) {
-    this.commonService.deleteOwnDataDelete(data).subscribe((d) => {
-      let ind = this.ownData.indexOf(data);
-      this.ownData.splice(ind, 1)
-      console.log('Delete recored');
-    })
-  }
-
   saveUser(data: any) {
+    console.log('data :>> ', data);
     if (this.addUserForm.invalid) {
       this.toastrService.error('Please fill all details', 'Error', { closeButton: true, progressBar: true, progressAnimation: 'decreasing' });
       return

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Users } from '../common';
 // import { Observable } from 'rxjs/Observable';
@@ -15,8 +16,8 @@ export class CommonService {
     // });
   }
 
-  getUser() {
-    return this.http.get(environment.apiUrl + `posts`)
+  getUser(): Observable<Users[]> {
+    return this.http.get<Users[]>(environment.apiUrl + `posts`)
   }
 
   postUser(user: Users) {

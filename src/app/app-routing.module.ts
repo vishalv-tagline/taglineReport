@@ -5,7 +5,7 @@ import { TaglineReportComponent } from './feature/tagline-report/tagline-report.
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'taglineReport',
     component: TaglineReportComponent
   },
   {
@@ -14,7 +14,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: ''
+    redirectTo: 'taglineReport'
   }
 ];
 
