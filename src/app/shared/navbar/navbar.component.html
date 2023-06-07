@@ -1,18 +1,17 @@
 <div class="header">
     <img src="../../../assets/images/logo.png" alt="">
 </div>
-<div class="d-flex">
-    <div class="back">
+<div class="d-flex justify-content-around">
+    <div class="textColor" [routerLink]="'/taglineReport'" [routerLinkActive]="['isActive']">
         <h4 class="textChange">
-            <a [routerLink]="'/taglineReport'" [routerLinkActive]="'isActive'">Daily Updates</a>
+            <a>Daily Updates</a>
         </h4>
     </div>
     <div class="vr">
     </div>
-    <div class="back2">
+    <div class="textColor" [routerLink]="'/taglineLeaveReport'" [routerLinkActive]="['isActive']">
         <h4 class="textChange">
-            <a [routerLink]="'/taglineLeaveReport'" [routerLinkActive]="'isActive'">Request For
-                Leave</a>
+            <a>Request For Leave</a>
         </h4>
     </div>
 </div>

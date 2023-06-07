@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { CommonService } from 'src/app/services/common.service';
 
 
@@ -13,12 +14,8 @@ export class TaglineReportComponent implements OnInit {
 
   public reportForm!: FormGroup;
   public myDate = new Date();
-  public getDate = this.myDate.getDate()
-  public months: string[] = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  public getMonth = this.months[this.myDate.getMonth()]
-  public getFullYear = this.myDate.getFullYear()
 
-  // public errorMsg: string = "Please fill first"
+  public errorMsg: string = "Please fill first"
 
   public showError: boolean = false;
   public showError2: boolean = false;
@@ -31,7 +28,10 @@ export class TaglineReportComponent implements OnInit {
     return this.fb.control(null, [Validators.required])
   }
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private commonService: CommonService) {
+  constructor(private fb: FormBuilder,
+    private http: HttpClient,
+    private commonService: CommonService,
+    private toastrService: ToastrService) {
 
     // this.http.get('https://jsonplaceholder.typicode.com/posts').subscribe(data => {
     //   console.log("Api Data :>> ", data);
@@ -91,9 +91,6 @@ export class TaglineReportComponent implements OnInit {
   }
 
   addCompletedTask(groupName: string) {
-
-
-
     switch (groupName) {
       case 'completed':
         this.showError = true;
@@ -177,7 +174,7 @@ export class TaglineReportComponent implements OnInit {
     // console.log('textCollect :>> ', textCollect)
     navigator.clipboard.writeText(textCollect)
     let btnCopied = (document.getElementById('btnCopy') as HTMLElement);
-    btnCopied.innerText = "Copied!"
-    // btnCopied.innerText = `<i class="fa-duotone fa-check"></i>`
+    this.toastrService.success('Text copy successfully', 'Copied!', { closeButton: true, progressBar: true, progressAnimation: 'decreasing' });
+    return btnCopied.innerText = "Copied!";
   }
 }

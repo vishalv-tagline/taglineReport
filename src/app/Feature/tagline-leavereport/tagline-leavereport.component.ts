@@ -34,6 +34,7 @@ export class TaglineLeavereportComponent implements OnInit {
   submitted: boolean = false;
   public deleteUserId!: number;
 
+  public search: string = ''
 
   constructor(private commonService: CommonService, private fb: FormBuilder, private toastrService: ToastrService) {
 
